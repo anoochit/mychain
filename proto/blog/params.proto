@@ -1,0 +1,12 @@
+syntax = "proto3";
+package anoochit.mychain.blog;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/anoochit/mychain/x/blog/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+package anoochit.mychain.blog;
+
+option go_package = "github.com/anoochit/mychain/x/blog/types";
+
+message Blog {
+  uint64 id = 1;
+  string title = 2; 
+  string body = 3; 
+  string creator = 4;
+}

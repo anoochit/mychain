@@ -1,0 +1,58 @@
+syntax = "proto3";
+package anoochit.mychain.blog;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "blog/params.proto";
+import "blog/blog.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "github.com/anoochit/mychain/x/blog/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/anoochit/mychain/blog/params";
+  }
+  // Queries a Blog by id.
+	rpc Blog(QueryGetBlogRequest) returns (QueryGetBlogResponse) {
+		option (google.api.http).get = "/anoochit/mychain/blog/blog/{id}";
+	}
+
+	// Queries a list of Blog items.
+	rpc BlogAll(QueryAllBlogRequest) returns (QueryAllBlogResponse) {
+		option (google.api.http).get = "/anoochit/mychain/blog/blog";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetBlogRequest {
+	uint64 id = 1;
+}
+
+message QueryGetBlogResponse {
+	Blog Blog = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllBlogRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllBlogResponse {
+	repeated Blog Blog = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// this line is used by starport scaffolding # 3
