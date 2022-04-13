@@ -4,15 +4,15 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgDeleteBlog } from "./types/blog/tx";
 import { MsgUpdateBlog } from "./types/blog/tx";
 import { MsgCreateBlog } from "./types/blog/tx";
+import { MsgDeleteBlog } from "./types/blog/tx";
 
 
 const types = [
-  ["/anoochit.mychain.blog.MsgDeleteBlog", MsgDeleteBlog],
   ["/anoochit.mychain.blog.MsgUpdateBlog", MsgUpdateBlog],
   ["/anoochit.mychain.blog.MsgCreateBlog", MsgCreateBlog],
+  ["/anoochit.mychain.blog.MsgDeleteBlog", MsgDeleteBlog],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -45,9 +45,9 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgDeleteBlog: (data: MsgDeleteBlog): EncodeObject => ({ typeUrl: "/anoochit.mychain.blog.MsgDeleteBlog", value: MsgDeleteBlog.fromPartial( data ) }),
     msgUpdateBlog: (data: MsgUpdateBlog): EncodeObject => ({ typeUrl: "/anoochit.mychain.blog.MsgUpdateBlog", value: MsgUpdateBlog.fromPartial( data ) }),
     msgCreateBlog: (data: MsgCreateBlog): EncodeObject => ({ typeUrl: "/anoochit.mychain.blog.MsgCreateBlog", value: MsgCreateBlog.fromPartial( data ) }),
+    msgDeleteBlog: (data: MsgDeleteBlog): EncodeObject => ({ typeUrl: "/anoochit.mychain.blog.MsgDeleteBlog", value: MsgDeleteBlog.fromPartial( data ) }),
     
   };
 };

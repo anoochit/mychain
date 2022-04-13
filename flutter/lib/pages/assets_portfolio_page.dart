@@ -79,7 +79,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                       children: [
                         Expanded(
                           child: CosmosElevatedButton(
-                            text: 'x',
+                            text: 'Post Blog',
                             backgroundColor: Colors.black,
                             onTap: () async {
                               // get password
